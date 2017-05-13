@@ -136,4 +136,10 @@ public class PouchFragment {
                 .into(pouchRecyclerView);
     }
 
+    public void popupBarcodeDialog() {
+        new MaterialDialog.Builder(context)
+                .customView(R.layout.dialog_barcode_popup, false)
+                .build().show();
+    }
+
 }

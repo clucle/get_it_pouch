@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp">
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/dialog_prod_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/dialog_brand_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_below="@id/dialog_prod_image"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/dialog_prod_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_below="@id/dialog_brand_name"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/ask_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_prod_name"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ask_submit"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ask_submit"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/negative"
+            android:layout_width="0px"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"/>
+        <Button
+            android:id="@+id/positive"
+            android:layout_width="0px"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="@string/ok"
+            android:textSize="18sp"
+            android:background="@android:color/white"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
