@@ -3,10 +3,12 @@ package kr.edcan.getitpouch.fragment;
 import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -45,6 +47,7 @@ public class PouchFragment {
     private GridLayoutManager gridLayoutManager;
     private ArrayList<Costemic> dataList = new ArrayList<>();
     private EventHandler eventHandler;
+    private FloatingActionButton fab;
 
     public PouchFragment(Context context, FragmentPouchBinding fragmentPouchBinding) {
         this.context = context;
@@ -105,6 +108,13 @@ public class PouchFragment {
         gridLayoutManager = new GridLayoutManager(context, 2);
         pouchRecyclerView = fragmentPouchBinding.pouchRecyclerView;
         pouchRecyclerView.setLayoutManager(gridLayoutManager);
+        fab = fragmentPouchBinding.addCosmeticFab;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: 카페라 엑티비티 연결
+            }
+        });
         setData();
         LastAdapter.with(dataList, BR.content)
                 .map(Costemic.class, new ItemType<PouchContentBinding>(R.layout.pouch_content) {

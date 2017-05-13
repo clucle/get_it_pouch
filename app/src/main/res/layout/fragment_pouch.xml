@@ -16,7 +16,6 @@
             android:layout_margin="16dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:onClick="onAddCosmeticFABCliked"
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal"/>
     </RelativeLayout>

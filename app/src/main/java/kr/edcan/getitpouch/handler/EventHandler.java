@@ -41,8 +41,4 @@ public class EventHandler {
         //Log.d("D");
     }
 
-    //  화장품 등록 플로팅 버튼
-    public void onAddCosmeticFABClicked() {
-
-    }
 }
