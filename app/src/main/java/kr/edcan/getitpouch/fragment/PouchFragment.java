@@ -1,6 +1,7 @@
 package kr.edcan.getitpouch.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import kr.edcan.getitpouch.R;
+import kr.edcan.getitpouch.activity.CameraActivity;
 import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
 import kr.edcan.getitpouch.databinding.FragmentRankingBinding;
 import kr.edcan.getitpouch.databinding.PouchContentBinding;
@@ -112,7 +114,7 @@ public class PouchFragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: 카페라 엑티비티 연결
+                context.startActivity(new Intent(context, CameraActivity.class));
             }
         });
         setData();
