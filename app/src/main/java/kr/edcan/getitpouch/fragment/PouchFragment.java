@@ -96,7 +96,7 @@ public class PouchFragment {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
                     }
-                });
+                }).show();
     }
 
     private void setDefault() {

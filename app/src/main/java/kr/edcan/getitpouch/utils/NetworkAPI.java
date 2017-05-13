@@ -16,19 +16,24 @@ import retrofit2.http.POST;
 
 public interface NetworkAPI {
 
-    /*
-    @POST("/api/request/login")
-    @FormUrlEncoded
-    Call<ArrayList<ResponseBody>> getAsdf(
-            @Field("asdf") String asdf
-    );*/
-
     @POST("/rank")
     @FormUrlEncoded
-    Call<ResponseBody> getRank(
+    Call<Costemics> getRank(
         @Field("order") String order,
         @Field("age") String age,
         @Field("rank_term") String rankTerm
+    );
+
+    @POST("scan")
+    @FormUrlEncoded
+    Call<Costemic> scanBarcode(
+        @Field("barcode") String barcode
+    );
+
+    @POST("/search")
+    @FormUrlEncoded
+    Call<Costemic> searchCosmetic(
+        @Field("product_id") String productId
     );
 
     @POST("/my_pouch/list")
@@ -40,6 +45,20 @@ public interface NetworkAPI {
     @POST("/my_pouch/add_item")
     @FormUrlEncoded
     Boolean addCosmetic(
+        @Field("user_id") String userId,
+        @Field("product_id") String productId
+    );
+
+    @POST("my_pouch/delete")
+    @FormUrlEncoded
+    Boolean deleteCosmetic(
+        @Field("user_id") String userId,
+        @Field("product_id") String productId
+    );
+
+    @POST("my_pouch/re_buy")
+    @FormUrlEncoded
+    Boolean rebuyCosmetic(
             @Field("user_id") String userId,
             @Field("product_id") String productId
     );
