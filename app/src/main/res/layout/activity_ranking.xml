@@ -1,0 +1,57 @@
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="kr.edcan.getitpouch.activity.RankingActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <kr.edcan.getitpouch.views.CartaTagView
+                android:id="@+id/repurchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="재구매"
+                android:textSize="12sp"
+                app:fullMode="true"
+                app:themeColor="#7E57C2" />
+
+            <kr.edcan.getitpouch.views.CartaTagView
+                android:id="@+id/byage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="연령대별"
+                android:textSize="12sp"
+                app:fullMode="true"
+                app:themeColor="#7E57C2" />
+
+            <kr.edcan.getitpouch.views.CartaTagView
+                android:id="@+id/bytime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="기간별"
+                android:textSize="12sp"
+                app:fullMode="true"
+                app:themeColor="#7E57C2" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rankingRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>
