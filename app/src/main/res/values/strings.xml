@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GetItPouch</string>
+    <string name="pouch">파우치</string>
+    <string name="ranking">랭킹</string>
+    <string name="sale">세일</string>
+    <string name="settings">설정</string>
+</resources>

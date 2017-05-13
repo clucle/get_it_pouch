@@ -1,0 +1,35 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="kr.edcan.cardline.activity.MainActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:contentInsetStartWithNavigation="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+        <kr.edcan.getitpouch.views.AliveFragmentView
+            android:id="@+id/mainFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" />
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/mainBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottombar_height"
+            android:background="@color/colorPrimary"
+            android:gravity="center_vertical"
+            app:bb_activeTabColor="@android:color/transparent"
+            app:bb_inActiveTabAlpha="0.3"
+            app:bb_inActiveTabColor="@android:color/transparent"
+            app:bb_tabXmlResource="@xml/main_bottombar_tab" />
+
+    </LinearLayout>
+</layout>

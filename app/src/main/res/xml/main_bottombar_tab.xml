@@ -1,0 +1,18 @@
+<tabs>
+    <tab
+        id="@+id/main_pouch"
+        icon="@mipmap/ic_launcher"
+        title="Pouch" />
+    <tab
+        id="@+id/main_ranking"
+        icon="@mipmap/ic_launcher"
+        title="Ranking" />
+    <tab
+        id="@+id/main_sale"
+        icon="@mipmap/ic_launcher"
+        title="Sale" />
+    <tab
+        id="@+id/main_settings"
+        icon="@mipmap/ic_launcher"
+        title="Settings" />
+</tabs>
