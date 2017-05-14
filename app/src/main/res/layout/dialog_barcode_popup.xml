@@ -36,6 +36,7 @@
         android:text="@string/ask_submit"/>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ask_submit"
