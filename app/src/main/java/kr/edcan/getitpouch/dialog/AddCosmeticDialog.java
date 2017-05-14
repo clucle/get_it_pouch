@@ -8,21 +8,17 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
 import kr.edcan.getitpouch.Constant;
 import kr.edcan.getitpouch.R;
-import kr.edcan.getitpouch.models.Costemic;
+import kr.edcan.getitpouch.models.Cosmetic;
 import kr.edcan.getitpouch.net.res.Common;
 import kr.edcan.getitpouch.utils.ImageSingleton;
-import kr.edcan.getitpouch.utils.NetworkAPI;
 import kr.edcan.getitpouch.utils.NetworkHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +42,7 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
 
     private String barcode;
 
-    Costemic cosmetic;
+    Cosmetic cosmetic;
 
 
     @Override
@@ -66,14 +62,14 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
         image = (NetworkImageView) rootView.findViewById(R.id.dialog_prod_image);
         brand = (TextView) rootView.findViewById(R.id.dialog_brand_name);
         product = (TextView) rootView.findViewById(R.id.dialog_prod_name);
-        brand.setText(cosmetic.brandName);
+        brand.setText(cosmetic.brand_name);
         product.setText(cosmetic.name);
-        image.setImageUrl(cosmetic.imageUrl, ImageSingleton.getInstance(getContext()).getImageLoader());
+        image.setImageUrl(cosmetic.image_url, ImageSingleton.getInstance(getContext()).getImageLoader());
 
         NetworkHelper.getNetworkInstance().scanBarcode(barcode)
-                .enqueue(new Callback<Costemic>() {
+                .enqueue(new Callback<Cosmetic>() {
                     @Override
-                    public void onResponse(Call<Costemic> call, Response<Costemic> response) {
+                    public void onResponse(Call<Cosmetic> call, Response<Cosmetic> response) {
                         if(response.isSuccessful() && response.body() != null) {
                             cosmetic = response.body();
                         } else {
@@ -82,7 +78,7 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
                     }
 
                     @Override
-                    public void onFailure(Call<Costemic> call, Throwable t) {
+                    public void onFailure(Call<Cosmetic> call, Throwable t) {
                         Toast.makeText(getActivity(), getContext().getString(R.string.network_fail),
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -100,7 +96,7 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
                 dismiss();
                 break;
             case R.id.positive:
-                NetworkHelper.getNetworkInstance().addCosmetic("10612", cosmetic.productId)
+                NetworkHelper.getNetworkInstance().addCosmetic("10612", cosmetic.product_id)
                         .enqueue(new Callback<Common>() {
                             @Override
                             public void onResponse(Call<Common> call, Response<Common> response) {

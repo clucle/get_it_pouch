@@ -1,21 +1,14 @@
 package kr.edcan.getitpouch.fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.nitrico.lastadapter.BR;
 import com.github.nitrico.lastadapter.ItemType;
 import com.github.nitrico.lastadapter.LastAdapter;
@@ -34,7 +27,7 @@ import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
 import kr.edcan.getitpouch.databinding.PouchContentBinding;
 import kr.edcan.getitpouch.dialog.AddCosmeticDialog;
 import kr.edcan.getitpouch.handler.EventHandler;
-import kr.edcan.getitpouch.models.Costemic;
+import kr.edcan.getitpouch.models.Cosmetic;
 import kr.edcan.getitpouch.models.Costemics;
 import kr.edcan.getitpouch.utils.ImageSingleton;
 import kr.edcan.getitpouch.utils.NetworkHelper;
@@ -51,7 +44,7 @@ public class PouchFragment implements Data.DataChangeListener {
     private RecyclerView pouchRecyclerView;
     private FragmentPouchBinding fragmentPouchBinding;
     private GridLayoutManager gridLayoutManager;
-    private ArrayList<Costemic> dataList = new ArrayList<>();
+    private ArrayList<Cosmetic> dataList = new ArrayList<>();
     private EventHandler eventHandler;
     private FloatingActionButton fab;
 
@@ -85,13 +78,13 @@ public class PouchFragment implements Data.DataChangeListener {
     }
 
     private void setData() {
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
-        dataList.add(new Costemic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
+        dataList.add(new Cosmetic());
     }
 
 
@@ -110,13 +103,12 @@ public class PouchFragment implements Data.DataChangeListener {
         });
         setData();
         LastAdapter.with(dataList, BR.content)
-                .map(Costemic.class, new ItemType<PouchContentBinding>(R.layout.pouch_content) {
+                .map(Cosmetic.class, new ItemType<PouchContentBinding>(R.layout.pouch_content) {
                     @Override
                     public void onBind(@NotNull ViewHolder<PouchContentBinding> viewHolder) {
                         super.onBind(viewHolder);
                         viewHolder.getBinding().setEventHandler(eventHandler);
-                        viewHolder.getBinding().image.setImageUrl
-                                (dataList.get(viewHolder.getPosition()).imageUrl,
+                        viewHolder.getBinding().image.setImageUrl(dataList.get(viewHolder.getPosition()).image_url,
                                         ImageSingleton.getInstance(context).getImageLoader());
                     }
                 })

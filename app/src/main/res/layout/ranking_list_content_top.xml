@@ -4,7 +4,7 @@
 
         <variable
             name="content"
-            type="kr.edcan.getitpouch.models.Costemic" />
+            type="kr.edcan.getitpouch.models.Cosmetic" />
 
         <variable
             name="eventHandler"
@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{content.brandName}"
+                android:text="@{content.brand_name}"
                 android:textSize="14sp" />
 
             <TextView

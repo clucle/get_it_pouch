@@ -16,14 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import kr.edcan.getitpouch.R;
-import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
 import kr.edcan.getitpouch.databinding.FragmentRankingBinding;
-import kr.edcan.getitpouch.databinding.FragmentSaleBinding;
-import kr.edcan.getitpouch.databinding.PouchContentBinding;
 import kr.edcan.getitpouch.databinding.RankingContentBinding;
 import kr.edcan.getitpouch.handler.EventHandler;
-import kr.edcan.getitpouch.models.Costemic;
-import kr.edcan.getitpouch.utils.ImageSingleton;
 
 /**
  * Created by Junseok Oh on 2017-05-14.

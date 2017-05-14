@@ -1,6 +1,5 @@
 package kr.edcan.getitpouch.activity;
 
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,14 +19,13 @@ import java.util.ArrayList;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.databinding.ActivityRankingBinding;
 import kr.edcan.getitpouch.databinding.RankingListContentBinding;
-import kr.edcan.getitpouch.databinding.RankingListContentTopBinding;
-import kr.edcan.getitpouch.models.Costemic;
+import kr.edcan.getitpouch.models.Cosmetic;
 
 public class RankingActivity extends BaseActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private ActivityRankingBinding binding;
-    private ArrayList<Costemic> listData = new ArrayList<>();
+    private ArrayList<Cosmetic> listData = new ArrayList<>();
     private int sortType = 0; // 0 인기순위 1 재구매율
     private int ageType = 0; // 0 선택ㄴㄴ 1 10대 2 20대 3 30대 4 40대+
     private int timeType = 0; // 0 선택ㄴㄴ 1 3개월 2 6개월
@@ -48,7 +46,7 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
         setData();
         setToolbarTitle("랭킹");
         LastAdapter.with(listData, BR._all)
-                .map(Costemic.class, new ItemType<RankingListContentBinding>(R.layout.ranking_list_content) {
+                .map(Cosmetic.class, new ItemType<RankingListContentBinding>(R.layout.ranking_list_content) {
                     @Override
                     public void onBind(@NotNull ViewHolder<RankingListContentBinding> viewHolder) {
                         super.onBind(viewHolder);
@@ -65,13 +63,13 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void setData() {
-        listData.add(new Costemic());
-        listData.add(new Costemic());
-        listData.add(new Costemic());
-        listData.add(new Costemic());
-        listData.add(new Costemic());
-        listData.add(new Costemic());
-        listData.add(new Costemic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
+        listData.add(new Cosmetic());
     }
 
     @Override

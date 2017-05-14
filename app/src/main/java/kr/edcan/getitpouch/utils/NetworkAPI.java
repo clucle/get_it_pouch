@@ -1,11 +1,8 @@
 package kr.edcan.getitpouch.utils;
 
-import java.util.ArrayList;
-
-import kr.edcan.getitpouch.models.Costemic;
+import kr.edcan.getitpouch.models.Cosmetic;
 import kr.edcan.getitpouch.models.Costemics;
 import kr.edcan.getitpouch.net.res.Common;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -27,13 +24,13 @@ public interface NetworkAPI {
 
     @POST("scan")
     @FormUrlEncoded
-    Call<Costemic> scanBarcode(
+    Call<Cosmetic> scanBarcode(
         @Field("barcode") String barcode
     );
 
     @POST("/search")
     @FormUrlEncoded
-    Call<Costemic> searchCosmetic(
+    Call<Cosmetic> searchCosmetic(
         @Field("product_id") String productId
     );
 
