@@ -28,7 +28,7 @@ import kr.edcan.getitpouch.databinding.PouchContentBinding;
 import kr.edcan.getitpouch.dialog.AddCosmeticDialog;
 import kr.edcan.getitpouch.handler.EventHandler;
 import kr.edcan.getitpouch.models.Cosmetic;
-import kr.edcan.getitpouch.models.Costemics;
+import kr.edcan.getitpouch.models.Cosmetics;
 import kr.edcan.getitpouch.utils.ImageSingleton;
 import kr.edcan.getitpouch.utils.NetworkHelper;
 import retrofit2.Call;
@@ -56,9 +56,9 @@ public class PouchFragment implements Data.DataChangeListener {
 
         NetworkHelper.getNetworkInstance().getCosmetics
                 ("10612")
-                .enqueue(new Callback<Costemics>() {
+                .enqueue(new Callback<Cosmetics>() {
             @Override
-            public void onResponse(Call<Costemics> call, Response<Costemics> response) {
+            public void onResponse(Call<Cosmetics> call, Response<Cosmetics> response) {
                 //response.code //response.body //
                 if (response.code() == 200 && response.body().item != null) {
                     dataList = response.body().item;
@@ -70,7 +70,7 @@ public class PouchFragment implements Data.DataChangeListener {
             }
 
             @Override
-            public void onFailure(Call<Costemics> call, Throwable t) {
+            public void onFailure(Call<Cosmetics> call, Throwable t) {
                 Log.e("[Server]", t.getLocalizedMessage());
             }
         });

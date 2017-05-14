@@ -81,8 +81,8 @@ public class SaleFragment {
                         Event itemCosmetic = dataList.get(viewHolder.getPosition());
                         viewHolder.getBinding().title.setText(itemCosmetic.getTitle());
                         viewHolder.getBinding().content.setText(itemCosmetic.getDate());
-                        if (itemCosmetic.getImageUrl().equals("sale1"))
-                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale1);
+//                        if (itemCosmetic.getImageUrl().equals("sale1"))
+//                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale1);
                     }
                 })
                 .handler(new LayoutHandler() {

@@ -1,9 +1,7 @@
 package kr.edcan.getitpouch.utils;
 
-import java.util.List;
-
 import kr.edcan.getitpouch.models.Cosmetic;
-import kr.edcan.getitpouch.models.Costemics;
+import kr.edcan.getitpouch.models.Cosmetics;
 import kr.edcan.getitpouch.net.res.Common;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -18,7 +16,7 @@ public interface NetworkAPI {
 
     @POST("/rank")
     @FormUrlEncoded
-    Call<List<Cosmetic>> getRank(
+    Call<Cosmetics> getRank(
         @Field("order") String order,
         @Field("age") String age,
         @Field("rank_term") String rankTerm,
@@ -39,7 +37,7 @@ public interface NetworkAPI {
 
     @POST("/my_pouch/list")
     @FormUrlEncoded
-    Call<Costemics> getCosmetics(
+    Call<Cosmetics> getCosmetics(
         @Field("user_id") String userId
     );
 

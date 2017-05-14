@@ -23,7 +23,7 @@ import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.databinding.ActivityRankingBinding;
 import kr.edcan.getitpouch.databinding.RankingListContentBinding;
 import kr.edcan.getitpouch.models.Cosmetic;
-import kr.edcan.getitpouch.models.Costemics;
+import kr.edcan.getitpouch.models.Cosmetics;
 import kr.edcan.getitpouch.utils.NetworkHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,46 +57,51 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
         //setData();
         listData.clear();
 
+        setToolbarTitle("랭킹");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         NetworkHelper.getNetworkInstance().getRank(sortType, ageType, timeType, category)
-                .enqueue(new Callback<List<Cosmetic>>() {
+                .enqueue(new Callback<Cosmetics>() {
                     @Override
-                    public void onResponse(Call<List<Cosmetic>> call, Response<List<Cosmetic>> response) {
+                    public void onResponse(Call<Cosmetics> call, Response<Cosmetics> response) {
                         //response.code //response.body //
                         if (response.code() == 200 && response.body() != null) {
-                            listData = response.body();
-                            Log.d("AAA", "onResponse: " + listData.size());
+                            listData = response.body().item;
+                            LastAdapter.with(listData, BR.content)
+                                    .map(Cosmetic.class, new ItemType<RankingListContentBinding>(R.layout.ranking_list_content) {
+                                        @Override
+                                        public void onBind(@NotNull ViewHolder<RankingListContentBinding> viewHolder) {
+                                            super.onBind(viewHolder);
+                                            viewHolder.getBinding().position.setText((viewHolder.getAdapterPosition() + 1) + "");
+                                            viewHolder.getBinding().rankingName.setText(listData.get(viewHolder.getAdapterPosition()).name);
+                                            viewHolder.getBinding().rankingBrandName.setText(listData.get(viewHolder.getAdapterPosition()).brand_name);
+                                            viewHolder.getBinding().rankingPrice.setText(listData.get(viewHolder.getAdapterPosition()).price);
+                                        }
+                                    })
+                                    .handler(new LayoutHandler() {
+                                        @Override
+                                        public int getItemLayout(@NotNull Object o, int i) {
+                                            return R.layout.ranking_list_content;
+                                        }
+                                    })
+                                    .into(recyclerView);
                         } else {
                             onFailure(call, new Throwable(""));
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<List<Cosmetic>> call, Throwable t) {
+                    public void onFailure(Call<Cosmetics> call, Throwable t) {
                         Log.e("[Server]", t.getLocalizedMessage());
                     }
                 });
 
 
 
-        setToolbarTitle("랭킹");
-        LastAdapter.with(listData, BR._all)
-                .map(Cosmetic.class, new ItemType<RankingListContentBinding>(R.layout.ranking_list_content) {
-                    @Override
-                    public void onBind(@NotNull ViewHolder<RankingListContentBinding> viewHolder) {
-                        super.onBind(viewHolder);
-                        viewHolder.getBinding().position.setText(viewHolder.getAdapterPosition() + "");
-                        viewHolder.getBinding().rankingName.setText(listData.get(viewHolder.getAdapterPosition()).name);
-                        viewHolder.getBinding().rankingBrandName.setText(listData.get(viewHolder.getAdapterPosition()).brand_name);
-                        viewHolder.getBinding().rankingPrice.setText(listData.get(viewHolder.getAdapterPosition()).price);
-                    }
-                })
-                .handler(new LayoutHandler() {
-                    @Override
-                    public int getItemLayout(@NotNull Object o, int i) {
-                        return R.layout.ranking_list_content;
-                    }
-                })
-                .into(recyclerView);
     }
 
     @Override
@@ -111,7 +116,6 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        setDefault();
         switch (v.getId()) {
             case R.id.repurchase:
                 new MaterialDialog.Builder(this)

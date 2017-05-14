@@ -3,7 +3,6 @@ package kr.edcan.getitpouch.fragment;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.github.nitrico.lastadapter.BR;
 import com.github.nitrico.lastadapter.ItemType;
@@ -13,7 +12,6 @@ import com.github.nitrico.lastadapter.ViewHolder;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,11 +20,6 @@ import kr.edcan.getitpouch.databinding.FragmentRankingBinding;
 import kr.edcan.getitpouch.databinding.RankingContentBinding;
 import kr.edcan.getitpouch.handler.EventHandler;
 import kr.edcan.getitpouch.models.Cosmetic;
-import kr.edcan.getitpouch.models.Costemics;
-import kr.edcan.getitpouch.utils.NetworkHelper;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Junseok Oh on 2017-05-14.
