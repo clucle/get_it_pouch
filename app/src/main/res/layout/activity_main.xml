@@ -26,9 +26,9 @@
             android:layout_height="@dimen/bottombar_height"
             android:background="@color/colorPrimary"
             android:gravity="center_vertical"
-            app:bb_activeTabColor="@android:color/transparent"
-            app:bb_inActiveTabAlpha="0.3"
-            app:bb_inActiveTabColor="@android:color/transparent"
+
+            app:bb_activeTabColor="@android:color/white"
+            app:bb_inActiveTabColor="#7C7C7C"
             app:bb_tabXmlResource="@xml/main_bottombar_tab" />
 
     </LinearLayout>

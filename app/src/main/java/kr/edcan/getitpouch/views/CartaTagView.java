@@ -17,6 +17,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import kr.edcan.getitpouch.R;
+import kr.edcan.getitpouch.activity.RankingActivity;
 
 /**
  * Created by JunseokOh on 2016. 8. 6..
@@ -228,4 +229,6 @@ public class CartaTagView extends TextView {
         if(configuration.isTextColorEnabled()) setTextColorForceFully(configuration.getTextColor());
         setShapeGradientColor(configuration.getGradientStartColor(), configuration.getGradientEndColor());
     }
+
+
 }
