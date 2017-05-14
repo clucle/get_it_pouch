@@ -5,16 +5,16 @@ package kr.edcan.getitpouch.models;
  */
 
 public class Event {
-    private String title, content, imageUrl, eventId;
+    private String title, url, date, link;
 
     public Event() {
     }
 
-    public Event(String title, String content, String imageUrl, String eventId) {
+    public Event (String title, String date, String url, String link) {
         this.title = title;
-        this.content = content;
-        this.imageUrl = imageUrl;
-        this.eventId = eventId;
+        this.date = date;
+        this.url = url;
+        this.link = link;
     }
 
     public String getTitle() {
@@ -25,27 +25,25 @@ public class Event {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 
     public String getImageUrl() {
-        return imageUrl;
+        return url;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.url = imageUrl;
     }
 
-    public String getEventId() {
-        return eventId;
+    public String getLink() {
+        return link;
     }
 
-    public void setEventId(String eventId) {
-        this.eventId = eventId;
+    public String getDate() {
+        return date;
     }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }

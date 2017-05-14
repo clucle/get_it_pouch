@@ -2,6 +2,7 @@ package kr.edcan.getitpouch.handler;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -36,12 +37,16 @@ public class EventHandler {
 
     public void onEventClicked(String eventId) {
         // Work
+        Log.d("dududu", eventId);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(eventId));
+
+        context.startActivity(intent);
 
     }
 
     public void onRankingClicked(String ranking) {
         // Work
-        //Log.d("D");
+        //Log.d(ranking);
         context.startActivity(new Intent(context, RankingActivity.class)
                 .putExtra("ranking", ranking));
     }
