@@ -92,23 +92,8 @@ public class PouchFragment implements Data.DataChangeListener {
         dataList.add(new Costemic());
         dataList.add(new Costemic());
         dataList.add(new Costemic());
-        onClickAddCosmetic();
     }
 
-    public void onClickAddCosmetic() {
-
-        new MaterialDialog.Builder(context)
-                .title("등록")
-                .content("adsf")
-                .positiveText("예")
-                .negativeText("아니오")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                    }
-                }).show();
-    }
 
     private void setDefault() {
 

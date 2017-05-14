@@ -1,18 +1,18 @@
 <tabs>
     <tab
         id="@+id/main_pouch"
-        icon="@mipmap/ic_launcher"
+        icon="@drawable/ic_pouch"
         title="Pouch" />
     <tab
         id="@+id/main_ranking"
-        icon="@mipmap/ic_launcher"
+        icon="@drawable/ic_trophy_64"
         title="Ranking" />
     <tab
         id="@+id/main_sale"
-        icon="@mipmap/ic_launcher"
+        icon="@drawable/ic_sale"
         title="Sale" />
     <tab
         id="@+id/main_settings"
-        icon="@mipmap/ic_launcher"
+        icon="@drawable/ic_settings_white_24dp"
         title="Settings" />
 </tabs>
