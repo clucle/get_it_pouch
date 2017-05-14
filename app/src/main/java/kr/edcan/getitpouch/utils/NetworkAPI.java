@@ -19,7 +19,8 @@ public interface NetworkAPI {
     Call<Costemics> getRank(
         @Field("order") String order,
         @Field("age") String age,
-        @Field("rank_term") String rankTerm
+        @Field("rank_term") String rankTerm,
+        @Field("category") String category
     );
 
     @POST("scan")
