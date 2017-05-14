@@ -52,8 +52,8 @@ public class SaleFragment {
     private void setData() {
         Collections.addAll(dataList,
                 new Event("에뛰드 하우스", "~05.14", "sale1", "http://www.etude.co.kr/event.do?method=view_new&bltnCntSeq=1741&bltnCntClCd=ET01&bbsCd=ET&pageNum=1&isOnGoing=Y"),
-                new Event("", "", "", ""),
-                new Event("", "", "", "")
+                new Event("어퓨", "~05.14", "sale3", "http://apieu.beautynet.co.kr/goods.list.exhibition.do?ebtNo=3039"),
+                new Event("더페이스샵", "~05.25", "sale2", "http://www.thefaceshop.com/mall/event/event-view.jsp?seq=1074")
         );
     }
 
@@ -81,8 +81,13 @@ public class SaleFragment {
                         Event itemCosmetic = dataList.get(viewHolder.getPosition());
                         viewHolder.getBinding().title.setText(itemCosmetic.getTitle());
                         viewHolder.getBinding().content.setText(itemCosmetic.getDate());
-//                        if (itemCosmetic.getImageUrl().equals("sale1"))
-//                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale1);
+
+                        if (itemCosmetic.getImageUrl().equals("sale1"))
+                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale1);
+                        if (itemCosmetic.getImageUrl().equals("sale2"))
+                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale2);
+                        if (itemCosmetic.getImageUrl().equals("sale3"))
+                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale3);
                     }
                 })
                 .handler(new LayoutHandler() {
