@@ -6,7 +6,7 @@ package kr.edcan.getitpouch.models;
 
 public class Costemic {
     //private String title, content, productId;
-    private String productId, status, name, dDay, purchaseTime, imageUrl, brandName;
+    public String productId, status, name, dDay, purchaseTime, imageUrl, brandName, price;
 
     public Costemic() {
     }
@@ -22,8 +22,13 @@ public class Costemic {
         this.purchaseTime = purchaseTime;
     }
 
+
     public String getProductId() {
         return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getStatus() {
@@ -38,23 +43,47 @@ public class Costemic {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getDday() {
         return "D-" + dDay;
+    }
+
+    public void setdDay(String dDay) {
+        this.dDay = dDay;
     }
 
     public String getPurchaseTime() {
         return purchaseTime;
     }
 
+    public void setPurchaseTime(String purchaseTime) {
+        this.purchaseTime = purchaseTime;
+    }
+
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getBrandName() {
         return brandName;
     }
 
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
 
+    public String getPrice() {
+        return price;
+    }
 
-
+    public void setPrice(String price) {
+        this.price = price;
+    }
 }

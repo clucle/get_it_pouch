@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import kr.edcan.getitpouch.models.Costemic;
 import kr.edcan.getitpouch.models.Costemics;
+import kr.edcan.getitpouch.net.res.Common;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -44,21 +45,21 @@ public interface NetworkAPI {
 
     @POST("/my_pouch/add_item")
     @FormUrlEncoded
-    Boolean addCosmetic(
+    Call<Common> addCosmetic(
         @Field("user_id") String userId,
         @Field("product_id") String productId
     );
 
     @POST("my_pouch/delete")
     @FormUrlEncoded
-    Boolean deleteCosmetic(
+    Call<Common> deleteCosmetic(
         @Field("user_id") String userId,
         @Field("product_id") String productId
     );
 
     @POST("my_pouch/re_buy")
     @FormUrlEncoded
-    Boolean rebuyCosmetic(
+    Call<Common> rebuyCosmetic(
             @Field("user_id") String userId,
             @Field("product_id") String productId
     );

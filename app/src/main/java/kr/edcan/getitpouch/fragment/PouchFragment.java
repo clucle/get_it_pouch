@@ -27,14 +27,12 @@ import kr.edcan.getitpouch.Data;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.activity.CameraActivity;
 import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
-import kr.edcan.getitpouch.databinding.FragmentRankingBinding;
 import kr.edcan.getitpouch.databinding.PouchContentBinding;
 import kr.edcan.getitpouch.handler.EventHandler;
 import kr.edcan.getitpouch.models.Costemic;
 import kr.edcan.getitpouch.models.Costemics;
 import kr.edcan.getitpouch.utils.ImageSingleton;
 import kr.edcan.getitpouch.utils.NetworkHelper;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -128,7 +126,7 @@ public class PouchFragment implements Data.DataChangeListener {
                         super.onBind(viewHolder);
                         viewHolder.getBinding().setEventHandler(eventHandler);
                         viewHolder.getBinding().image.setImageUrl
-                                (dataList.get(viewHolder.getPosition()).getImageUrl(),
+                                (dataList.get(viewHolder.getPosition()).imageUrl,
                                         ImageSingleton.getInstance(context).getImageLoader());
                     }
                 })
