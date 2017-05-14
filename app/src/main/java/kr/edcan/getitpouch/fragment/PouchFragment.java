@@ -1,10 +1,13 @@
 package kr.edcan.getitpouch.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,11 +26,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import kr.edcan.getitpouch.Constant;
 import kr.edcan.getitpouch.Data;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.activity.CameraActivity;
 import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
 import kr.edcan.getitpouch.databinding.PouchContentBinding;
+import kr.edcan.getitpouch.dialog.AddCosmeticDialog;
 import kr.edcan.getitpouch.handler.EventHandler;
 import kr.edcan.getitpouch.models.Costemic;
 import kr.edcan.getitpouch.models.Costemics;
@@ -42,7 +47,7 @@ import retrofit2.Response;
  */
 
 public class PouchFragment implements Data.DataChangeListener {
-    private Context context;
+    private AppCompatActivity context;
     private RecyclerView pouchRecyclerView;
     private FragmentPouchBinding fragmentPouchBinding;
     private GridLayoutManager gridLayoutManager;
@@ -52,7 +57,7 @@ public class PouchFragment implements Data.DataChangeListener {
 
     private String barcode;
 
-    public PouchFragment(Context context, FragmentPouchBinding fragmentPouchBinding) {
+    public PouchFragment(AppCompatActivity context, FragmentPouchBinding fragmentPouchBinding) {
         this.context = context;
         this.fragmentPouchBinding = fragmentPouchBinding;
 
@@ -143,6 +148,11 @@ public class PouchFragment implements Data.DataChangeListener {
     }
 
     public void popupBarcodeDialog() {
+        AddCosmeticDialog dialog = new AddCosmeticDialog();
+        Bundle b = new Bundle();
+        b.putString(Constant.ADD_COSMETIC_DIALOG_BARCODE, barcode);
+        dialog.setArguments(b);
+        dialog.show(context.getSupportFragmentManager(), "cosmetic");
     }
 
     @Override

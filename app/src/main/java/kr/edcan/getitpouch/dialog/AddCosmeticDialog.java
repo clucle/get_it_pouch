@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
+import kr.edcan.getitpouch.Constant;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.models.Costemic;
 import kr.edcan.getitpouch.net.res.Common;
@@ -47,6 +48,12 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
 
     Costemic cosmetic;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        barcode = getArguments().getString(Constant.ADD_COSMETIC_DIALOG_BARCODE);
+    }
 
     @NonNull
     @Override
@@ -113,4 +120,5 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
                 break;
         }
     }
+
 }
