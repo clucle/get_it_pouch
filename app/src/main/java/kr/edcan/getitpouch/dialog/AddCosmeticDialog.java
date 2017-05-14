@@ -47,47 +47,10 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         barcode = getArguments().getString(Constant.ADD_COSMETIC_DIALOG_BARCODE);
+        super.onCreate(savedInstanceState);
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        LayoutInflater inflater = LayoutInflater.from(getActivity());
-        rootView = inflater.inflate(LAYOUT_RESOURCE, null);
-
-        cancel = (Button) rootView.findViewById(R.id.negative);
-        ok = (Button) rootView.findViewById(R.id.positive);
-        image = (NetworkImageView) rootView.findViewById(R.id.dialog_prod_image);
-        brand = (TextView) rootView.findViewById(R.id.dialog_brand_name);
-        product = (TextView) rootView.findViewById(R.id.dialog_prod_name);
-        brand.setText(cosmetic.brand_name);
-        product.setText(cosmetic.name);
-        image.setImageUrl(cosmetic.image_url, ImageSingleton.getInstance(getContext()).getImageLoader());
-
-        NetworkHelper.getNetworkInstance().scanBarcode(barcode)
-                .enqueue(new Callback<Cosmetic>() {
-                    @Override
-                    public void onResponse(Call<Cosmetic> call, Response<Cosmetic> response) {
-                        if(response.isSuccessful() && response.body() != null) {
-                            cosmetic = response.body();
-                        } else {
-                            onFailure(call, new Throwable(""));
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Cosmetic> call, Throwable t) {
-                        Toast.makeText(getActivity(), getContext().getString(R.string.network_fail),
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
-                .setView(rootView);
-        return dialog.create();
-    }
 
     @Override
     public void onClick(View v) {
@@ -96,23 +59,7 @@ public class AddCosmeticDialog extends DialogFragment implements View.OnClickLis
                 dismiss();
                 break;
             case R.id.positive:
-                NetworkHelper.getNetworkInstance().addCosmetic("10612", cosmetic.product_id)
-                        .enqueue(new Callback<Common>() {
-                            @Override
-                            public void onResponse(Call<Common> call, Response<Common> response) {
-                                if(response.isSuccessful() && response.body().status.equals("true")) {
 
-                                } else {
-                                    onFailure(call, new Throwable(""));
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<Common> call, Throwable t) {
-                                Toast.makeText(getContext(), getContext().getString(R.string.network_fail),
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        });
                 break;
         }
     }
