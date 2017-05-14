@@ -21,12 +21,15 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import kr.edcan.getitpouch.Data;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.camera.CameraManager;
 import kr.edcan.getitpouch.utils.AmbientLightManager;
 import kr.edcan.getitpouch.utils.CameraActivityHandler;
 import kr.edcan.getitpouch.utils.InactivityTimer;
 import kr.edcan.getitpouch.utils.IntentSource;
+import kr.edcan.getitpouch.utils.NetworkAPI;
+import kr.edcan.getitpouch.utils.NetworkHelper;
 import kr.edcan.getitpouch.utils.ResultHandler;
 import kr.edcan.getitpouch.utils.ResultHandlerFactory;
 import kr.edcan.getitpouch.views.ViewfinderView;
@@ -64,6 +67,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         return cameraManager;
     }
 
+    private NetworkAPI networkAPI;
 
     @Override
     protected void onResume() {
@@ -255,7 +259,10 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     }
 
     private void showResultDialog(final String resultData) {
-        Toast.makeText(this, resultData, Toast.LENGTH_SHORT).show();
+        Data.getInstance().barcodeData = resultData;
+        if(Data.getInstance().listener != null)
+            Data.getInstance().listener.onDataChange();
+        finish();
     }
 
     public void restartPreviewAfterDelay(long delayMS) {

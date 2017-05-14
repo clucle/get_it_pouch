@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import kr.edcan.getitpouch.Data;
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.activity.CameraActivity;
 import kr.edcan.getitpouch.databinding.FragmentPouchBinding;
@@ -42,7 +43,7 @@ import retrofit2.Response;
  * Created by Junseok Oh on 2017-05-14.
  */
 
-public class PouchFragment {
+public class PouchFragment implements Data.DataChangeListener {
     private Context context;
     private RecyclerView pouchRecyclerView;
     private FragmentPouchBinding fragmentPouchBinding;
@@ -50,6 +51,8 @@ public class PouchFragment {
     private ArrayList<Costemic> dataList = new ArrayList<>();
     private EventHandler eventHandler;
     private FloatingActionButton fab;
+
+    private String barcode;
 
     public PouchFragment(Context context, FragmentPouchBinding fragmentPouchBinding) {
         this.context = context;
@@ -136,12 +139,17 @@ public class PouchFragment {
                     }
                 })
                 .into(pouchRecyclerView);
+
+        //  set data class listener
+        Data.getInstance().listener = this;
     }
 
     public void popupBarcodeDialog() {
-        new MaterialDialog.Builder(context)
-                .customView(R.layout.dialog_barcode_popup, false)
-                .build().show();
     }
 
+    @Override
+    public void onDataChange() {
+        barcode = Data.getInstance().barcodeData;
+        popupBarcodeDialog();
+    }
 }
