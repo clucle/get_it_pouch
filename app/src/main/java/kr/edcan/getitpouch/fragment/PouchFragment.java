@@ -62,6 +62,7 @@ public class PouchFragment implements Data.DataChangeListener {
                 //response.code //response.body //
                 if (response.code() == 200 && response.body().item != null) {
                     dataList = response.body().item;
+                    setDefault();
                     // pass
                 } else {
                     onFailure(call, new Throwable(""));
@@ -74,7 +75,7 @@ public class PouchFragment implements Data.DataChangeListener {
             }
         });
 
-        setDefault();
+
     }
 
     private void setData() {
@@ -101,7 +102,7 @@ public class PouchFragment implements Data.DataChangeListener {
                 context.startActivity(new Intent(context, CameraActivity.class));
             }
         });
-        setData();
+        //setData();
         LastAdapter.with(dataList, BR.content)
                 .map(Cosmetic.class, new ItemType<PouchContentBinding>(R.layout.pouch_content) {
                     @Override

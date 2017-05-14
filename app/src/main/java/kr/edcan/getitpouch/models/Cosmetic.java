@@ -38,7 +38,7 @@ public class Cosmetic {
     }
 
     public void setD_day(String d_day) {
-        this.d_day = d_day;
+        this.d_day = "D-" + d_day;
     }
 
     public String getPurchase_time() {
