@@ -3,7 +3,11 @@ package kr.edcan.getitpouch.activity;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -32,6 +36,9 @@ public class MainActivity extends BaseActivity {
     SaleFragment saleFragment;
     SettingsFragment settingsFragment;
 
+    ImageView logo;
+    TextView page_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void setDefault() {
         initializeLayout();
+        logo = (ImageView) findViewById(R.id.logo);
+        page_title = (TextView) findViewById(R.id.page_title);
         initializeBottomBar();
     }
 
@@ -56,9 +65,7 @@ public class MainActivity extends BaseActivity {
         settingsFragment = new SettingsFragment(this, (FragmentSettingsBinding) fragmentBinding.get(3));
         disableToggle();
         aliveFragmentView.switchPage(0);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
         setToolbarTitle("");
-        getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_getitpouch_mainpage));
 
     }
 
@@ -66,37 +73,45 @@ public class MainActivity extends BaseActivity {
         binding.mainBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-                if (menu != null) {
-                    menu.clear();
-                    switch (tabId) {
-                        case R.id.main_pouch:
-                            aliveFragmentView.switchPage(0);
-//                            setToolbarTitle(getResources().getString(R.string.pouch));
-                            getSupportActionBar().setDisplayUseLogoEnabled(true);
-                            setToolbarTitle("");
-                            getSupportActionBar().setIcon(getResources().getDrawable(R.drawable.ic_getitpouch_mainpage));
-                            getMenuInflater().inflate(R.menu.menu_newsfeed, menu);
-                            break;
-                        case R.id.main_ranking:
-                            aliveFragmentView.switchPage(1);
-                            getSupportActionBar().setDisplayUseLogoEnabled(false);
-                            getSupportActionBar().setIcon(null);
-                            setToolbarTitle(getResources().getString(R.string.ranking));
-                            break;
-                        case R.id.main_sale:
-                            aliveFragmentView.switchPage(2);
-                            getSupportActionBar().setDisplayUseLogoEnabled(false);
-                            getSupportActionBar().setIcon(null);
-                            setToolbarTitle(getResources().getString(R.string.sale));
-                            break;
-                        case R.id.main_settings:
-                            aliveFragmentView.switchPage(3);
-                            getSupportActionBar().setDisplayUseLogoEnabled(false);
-                            getSupportActionBar().setIcon(null);
-                            setToolbarTitle(getResources().getString(R.string.settings));
-                            break;
-                    }
+                switch (tabId) {
+                    case R.id.main_pouch:
+                        if (logo.getVisibility() != View.VISIBLE) {
+                            logo.setVisibility(View.VISIBLE);
+                        }
+                        if (!page_title.getText().equals("")) {
+                            page_title.setText("");
+                        }
+                        aliveFragmentView.switchPage(0);
+                        break;
+                    case R.id.main_ranking:
+                        if (logo.getVisibility() != View.INVISIBLE) {
+                            logo.setVisibility(View.INVISIBLE);
+                        }
+                        if (!page_title.getText().equals(getString(R.string.ranking))) {
+                            page_title.setText(R.string.ranking);
+                        }
+                        aliveFragmentView.switchPage(1);
+                        break;
+                    case R.id.main_sale:
+                        if (logo.getVisibility() != View.INVISIBLE) {
+                            logo.setVisibility(View.INVISIBLE);
+                        }
+                        if (!page_title.getText().equals(getString(R.string.sale))) {
+                            page_title.setText(R.string.sale);
+                        }
+                        aliveFragmentView.switchPage(2);
+                        break;
+                    case R.id.main_settings:
+                        if (logo.getVisibility() != View.INVISIBLE) {
+                            logo.setVisibility(View.INVISIBLE);
+                        }
+                        if (!page_title.getText().equals(getString(R.string.settings))) {
+                            page_title.setText(R.string.settings);
+                        }
+                        aliveFragmentView.switchPage(3);
+                        break;
                 }
+
             }
         });
     }

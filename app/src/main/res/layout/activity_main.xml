@@ -7,11 +7,7 @@
         android:orientation="vertical"
         tools:context="kr.edcan.cardline.activity.MainActivity">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            app:contentInsetStartWithNavigation="0dp"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+        <include layout="@layout/toolbar" />
 
         <kr.edcan.getitpouch.views.AliveFragmentView
             android:id="@+id/mainFragmentContainer"
