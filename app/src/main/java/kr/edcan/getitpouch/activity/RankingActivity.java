@@ -1,8 +1,10 @@
 package kr.edcan.getitpouch.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -20,19 +22,27 @@ import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.databinding.ActivityRankingBinding;
 import kr.edcan.getitpouch.databinding.RankingListContentBinding;
 import kr.edcan.getitpouch.models.Cosmetic;
+import kr.edcan.getitpouch.models.Costemics;
+import kr.edcan.getitpouch.utils.NetworkHelper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RankingActivity extends BaseActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private ActivityRankingBinding binding;
     private ArrayList<Cosmetic> listData = new ArrayList<>();
-    private int sortType = 0; // 0 인기순위 1 재구매율
-    private int ageType = 0; // 0 선택ㄴㄴ 1 10대 2 20대 3 30대 4 40대+
-    private int timeType = 0; // 0 선택ㄴㄴ 1 3개월 2 6개월
+    private String sortType = "popularity";
+    private String ageType = "all";
+    private String timeType = "all";
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        category = intent.getStringExtra("ranking");
         setDefault();
     }
 
@@ -43,7 +53,31 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
         binding.repurchase.setOnClickListener(this);
         binding.byage.setOnClickListener(this);
         binding.bytime.setOnClickListener(this);
-        setData();
+        //setData();
+        listData.clear();
+
+        NetworkHelper.getNetworkInstance().getRank(sortType, ageType, timeType, category)
+                .enqueue(new Callback<Costemics>() {
+                    @Override
+                    public void onResponse(Call<Costemics> call, Response<Costemics> response) {
+                        //response.code //response.body //
+                        if (response.code() == 200 && response.body().item != null) {
+                            listData = response.body().item;
+                            setDefault();
+                            // pass
+                        } else {
+                            onFailure(call, new Throwable(""));
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Costemics> call, Throwable t) {
+                        Log.e("[Server]", t.getLocalizedMessage());
+                    }
+                });
+
+
+
         setToolbarTitle("랭킹");
         LastAdapter.with(listData, BR._all)
                 .map(Cosmetic.class, new ItemType<RankingListContentBinding>(R.layout.ranking_list_content) {
@@ -84,6 +118,7 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        setDefault();
         switch (v.getId()) {
             case R.id.repurchase:
                 new MaterialDialog.Builder(this)
@@ -95,11 +130,11 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
                                 switch (position) {
                                     case 0:
                                         // 인기순위
-                                        sortType = 0;
+                                        sortType = "popularity";
                                         binding.repurchase.setText("인기순위");
                                         break;
                                     case 1:
-                                        sortType = 1;
+                                        sortType = "re_purchase";
                                         binding.repurchase.setText("재구매율");
                                         break;
                                 }
@@ -117,27 +152,27 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
                                 switch (position) {
                                     case 0:
                                         // 전체
-                                        ageType = 0;
+                                        ageType = "all";
                                         binding.byage.setText("연령대");
                                         binding.byage.setFullMode(false);
                                         break;
                                     case 1:
-                                        ageType = 1;
+                                        ageType = "10";
                                         binding.byage.setText("10대");
                                         binding.byage.setFullMode(true);
                                         break;
                                     case 2:
-                                        ageType = 2;
+                                        ageType = "20";
                                         binding.byage.setText("20대");
                                         binding.byage.setFullMode(true);
                                         break;
                                     case 3:
-                                        ageType = 3;
+                                        ageType = "30";
                                         binding.byage.setText("30대");
                                         binding.byage.setFullMode(true);
                                         break;
                                     case 4:
-                                        ageType = 4;
+                                        ageType = "40+";
                                         binding.byage.setText("40대+");
                                         binding.byage.setFullMode(true);
                                         break;
@@ -156,17 +191,17 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
                                 switch (position) {
                                     case 0:
                                         // 전체
-                                        timeType = 0;
+                                        timeType = "all";
                                         binding.bytime.setText("기간별");
                                         binding.bytime.setFullMode(false);
                                         break;
                                     case 1:
-                                        timeType = 1;
+                                        timeType = "3";
                                         binding.bytime.setText("3개월");
                                         binding.bytime.setFullMode(true);
                                         break;
                                     case 2:
-                                        ageType = 2;
+                                        ageType = "6";
                                         binding.bytime.setText("6개월");
                                         binding.bytime.setFullMode(true);
                                         break;
