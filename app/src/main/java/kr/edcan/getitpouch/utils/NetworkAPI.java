@@ -1,5 +1,7 @@
 package kr.edcan.getitpouch.utils;
 
+import java.util.List;
+
 import kr.edcan.getitpouch.models.Cosmetic;
 import kr.edcan.getitpouch.models.Costemics;
 import kr.edcan.getitpouch.net.res.Common;
@@ -16,7 +18,7 @@ public interface NetworkAPI {
 
     @POST("/rank")
     @FormUrlEncoded
-    Call<Costemics> getRank(
+    Call<List<Cosmetic>> getRank(
         @Field("order") String order,
         @Field("age") String age,
         @Field("rank_term") String rankTerm,

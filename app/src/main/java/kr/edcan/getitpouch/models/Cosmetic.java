@@ -1,12 +1,14 @@
 package kr.edcan.getitpouch.models;
 
+import kr.edcan.getitpouch.net.res.Common;
+
 /**
  * Created by Junseok Oh on 2017-05-14.
  */
 
-public class Cosmetic {
+public class Cosmetic extends Common {
     //private String title, content, productId;
-    public String product_id, status, name, d_day, purchase_time, image_url, brand_name, price;
+    public String product_id, name, d_day, purchase_time, image_url, brand_name, price;
 
 
     public String getProduct_id() {
