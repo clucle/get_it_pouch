@@ -1,9 +1,14 @@
 package kr.edcan.getitpouch.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
+import com.android.volley.toolbox.ImageLoader;
 import com.github.nitrico.lastadapter.BR;
 import com.github.nitrico.lastadapter.ItemType;
 import com.github.nitrico.lastadapter.LastAdapter;
@@ -22,7 +27,9 @@ import kr.edcan.getitpouch.databinding.FragmentSettingsBinding;
 import kr.edcan.getitpouch.databinding.RankingContentBinding;
 import kr.edcan.getitpouch.databinding.SaleContentBinding;
 import kr.edcan.getitpouch.handler.EventHandler;
+import kr.edcan.getitpouch.models.Cosmetic;
 import kr.edcan.getitpouch.models.Event;
+import kr.edcan.getitpouch.utils.ImageSingleton;
 
 /**
  * Created by Junseok Oh on 2017-05-14.
@@ -44,9 +51,9 @@ public class SaleFragment {
 
     private void setData() {
         Collections.addAll(dataList,
-                new Event(),
-                new Event(),
-                new Event()
+                new Event("에뛰드 하우스", "~05.14", "sale1", "http://www.etude.co.kr/event.do?method=view_new&bltnCntSeq=1741&bltnCntClCd=ET01&bbsCd=ET&pageNum=1&isOnGoing=Y"),
+                new Event("", "", "", ""),
+                new Event("", "", "", "")
         );
     }
 
@@ -60,9 +67,22 @@ public class SaleFragment {
         LastAdapter.with(dataList, BR.content)
                 .map(Event.class, new ItemType<SaleContentBinding>(R.layout.sale_content) {
                     @Override
-                    public void onBind(@NotNull ViewHolder<SaleContentBinding> viewHolder) {
+                    public void onBind(@NotNull final ViewHolder<SaleContentBinding> viewHolder) {
                         super.onBind(viewHolder);
+                        viewHolder.getBinding().cardview.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(dataList.get(viewHolder.getAdapterPosition()).getLink()));
+                                Log.d("AAA", "onClick: ");
+                                context.startActivity(intent);
+                            }
+                        });
                         viewHolder.getBinding().setEventHandler(eventHandler);
+                        Event itemCosmetic = dataList.get(viewHolder.getPosition());
+                        viewHolder.getBinding().title.setText(itemCosmetic.getTitle());
+                        viewHolder.getBinding().content.setText(itemCosmetic.getDate());
+                        if (itemCosmetic.getImageUrl().equals("sale1"))
+                            viewHolder.getBinding().image.setImageResource(R.drawable.img_sale1);
                     }
                 })
                 .handler(new LayoutHandler() {
