@@ -42,6 +42,7 @@ public class EventHandler {
     public void onRankingClicked(String ranking) {
         // Work
         //Log.d("D");
+        Log.d("TAG", "onRankingClicked: " + ranking);
         context.startActivity(new Intent(context, RankingActivity.class)
                 .putExtra("ranking", ranking));
     }

@@ -17,6 +17,7 @@ import com.github.nitrico.lastadapter.ViewHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import kr.edcan.getitpouch.R;
 import kr.edcan.getitpouch.databinding.ActivityRankingBinding;
@@ -32,7 +33,7 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
 
     private RecyclerView recyclerView;
     private ActivityRankingBinding binding;
-    private ArrayList<Cosmetic> listData = new ArrayList<>();
+    private List<Cosmetic> listData = new ArrayList<>();
     private String sortType = "popularity";
     private String ageType = "all";
     private String timeType = "all";
@@ -57,21 +58,20 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
         listData.clear();
 
         NetworkHelper.getNetworkInstance().getRank(sortType, ageType, timeType, category)
-                .enqueue(new Callback<Costemics>() {
+                .enqueue(new Callback<List<Cosmetic>>() {
                     @Override
-                    public void onResponse(Call<Costemics> call, Response<Costemics> response) {
+                    public void onResponse(Call<List<Cosmetic>> call, Response<List<Cosmetic>> response) {
                         //response.code //response.body //
-                        if (response.code() == 200 && response.body().item != null) {
-                            listData = response.body().item;
-                            setDefault();
-                            // pass
+                        if (response.code() == 200 && response.body() != null) {
+                            listData = response.body();
+                            Log.d("AAA", "onResponse: " + listData.size());
                         } else {
                             onFailure(call, new Throwable(""));
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Costemics> call, Throwable t) {
+                    public void onFailure(Call<List<Cosmetic>> call, Throwable t) {
                         Log.e("[Server]", t.getLocalizedMessage());
                     }
                 });
@@ -84,7 +84,10 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onBind(@NotNull ViewHolder<RankingListContentBinding> viewHolder) {
                         super.onBind(viewHolder);
-                        viewHolder.getBinding().position.setText(viewHolder.getPosition() + "");
+                        viewHolder.getBinding().position.setText(viewHolder.getAdapterPosition() + "");
+                        viewHolder.getBinding().rankingName.setText(listData.get(viewHolder.getAdapterPosition()).name);
+                        viewHolder.getBinding().rankingBrandName.setText(listData.get(viewHolder.getAdapterPosition()).brand_name);
+                        viewHolder.getBinding().rankingPrice.setText(listData.get(viewHolder.getAdapterPosition()).price);
                     }
                 })
                 .handler(new LayoutHandler() {
@@ -94,16 +97,6 @@ public class RankingActivity extends BaseActivity implements View.OnClickListene
                     }
                 })
                 .into(recyclerView);
-    }
-
-    private void setData() {
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
-        listData.add(new Cosmetic());
     }
 
     @Override
